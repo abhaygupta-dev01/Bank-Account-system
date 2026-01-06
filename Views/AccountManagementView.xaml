@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="BankAssignment.Views.AccountManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="White">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+            <Button Content="Create Account" Click="CreateAccount_Click" Width="130" Height="30" Margin="5"/>
+            <Button Content="Modify Account" Click="ModifyAccount_Click" Width="130" Height="30" Margin="5"/>
+            <Button Content="View Account Details" Click="ViewDetails_Click" Width="150" Height="30" Margin="5"/>
+        </StackPanel>
+
+        <TabControl x:Name="MainTabControl" Grid.Row="1" BorderThickness="0">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
+
+            <TabItem x:Name="FormTab">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Account Type" FontWeight="Bold"/>
+                        <ComboBox x:Name="cmbType" SelectedIndex="0" Margin="0,5,0,10">
+                            <ComboBoxItem Content="Savings Account"/>
+                            <ComboBoxItem Content="Current Account"/>
+                        </ComboBox>
+
+                        <TextBlock Text="First Name" FontWeight="Bold"/>
+                        <TextBox x:Name="txtFirst" Margin="0,5,0,10"/>
+                        <TextBlock Text="Middle Name" FontWeight="Bold"/>
+                        <TextBox x:Name="txtMiddle" Margin="0,5,0,10"/>
+                        <TextBlock Text="Last Name" FontWeight="Bold"/>
+                        <TextBox x:Name="txtLast" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="Date of Birth" FontWeight="Bold"/>
+                        <DatePicker x:Name="dtpDOB" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="Gender" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                            <RadioButton x:Name="rbMale" Content="Male" IsChecked="True" Margin="0,0,10,0"/>
+                            <RadioButton x:Name="rbFemale" Content="Female"/>
+                        </StackPanel>
+
+                        <TextBlock Text="PAN Number" FontWeight="Bold"/>
+                        <TextBox x:Name="txtPan" Margin="0,5,0,10"/>
+                        <TextBlock Text="Current Address" FontWeight="Bold"/>
+                        <TextBox x:Name="txtCurrAddr" Height="40" TextWrapping="Wrap" Margin="0,5,0,10"/>
+                        <TextBlock Text="Permanent Address" FontWeight="Bold"/>
+                        <TextBox x:Name="txtPermAddr" Height="40" TextWrapping="Wrap" Margin="0,5,0,10"/>
+                        <TextBlock Text="Mobile Number" FontWeight="Bold"/>
+                        <TextBox x:Name="txtMobile" Margin="0,5,0,10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Save Details" Click="Save_Click" Width="120" Height="30" Margin="10" Background="Green" Foreground="White"/>
+                            <Button Content="Clear Fields" Click="ClearForm_Click" Width="120" Height="30" Margin="10"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem x:Name="GridTab">
+                <DataGrid x:Name="dgAccounts" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Action">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Click="Delete_Click" Background="Red" Foreground="White"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Acc No" Binding="{Binding AccountNumber}" Width="80" CanUserSort="True"/>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="*" CanUserSort="True"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*"/>
+                        <DataGridTextColumn Header="PAN" Binding="{Binding PanNumber}" Width="100"/>
+                        <DataGridTextColumn Header="Mobile" Binding="{Binding MobileNumber}" Width="100"/>
+                        <DataGridTextColumn Header="Address" Binding="{Binding CurrentAddress}" Width="150"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
