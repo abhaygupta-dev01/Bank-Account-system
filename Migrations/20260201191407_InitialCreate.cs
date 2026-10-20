@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BankAssignment.Migrations
 {
     /// <inheritdoc />
-    public partial class FinalDatabaseFix : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,7 +26,8 @@ namespace BankAssignment.Migrations
                     PanNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CurrentAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PermanentAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdharNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

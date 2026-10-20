@@ -1,7 +1,8 @@
-﻿<UserControl x:Class="BankAssignment.Views.AccountManagementView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Background="White">
+             xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="BankAssignment.Views.AccountManagementView"
+             Background="White" Loaded="UserControl_Loaded" av:DesignHeight="364.36" av:DesignWidth="520.8">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,9 +15,9 @@
             <Button Content="View Account Details" Click="ViewDetails_Click" Width="150" Height="30" Margin="5"/>
         </StackPanel>
 
-        <TabControl x:Name="MainTabControl" Grid.Row="1" BorderThickness="0">
+        <TabControl x:Name="MainTabControl" BorderThickness="0" Grid.Row="1">
             <TabControl.ItemContainerStyle>
-                <Style TargetType="TabItem">
+                <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </Style>
             </TabControl.ItemContainerStyle>
@@ -54,6 +55,9 @@
                         <TextBox x:Name="txtPermAddr" Height="40" TextWrapping="Wrap" Margin="0,5,0,10"/>
                         <TextBlock Text="Mobile Number" FontWeight="Bold"/>
                         <TextBox x:Name="txtMobile" Margin="0,5,0,10"/>
+                        <TextBlock Text="Adhar No" FontWeight="Bold"/>
+                        <TextBox x:Name="txtAdhar" Margin="0,5,0,10"/>
+
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button Content="Save Details" Click="Save_Click" Width="120" Height="30" Margin="10" Background="Green" Foreground="White"/>
@@ -74,12 +78,24 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="Acc No" Binding="{Binding AccountNumber}" Width="80" CanUserSort="True"/>
-                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="*" CanUserSort="True"/>
-                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*"/>
-                        <DataGridTextColumn Header="PAN" Binding="{Binding PanNumber}" Width="100"/>
-                        <DataGridTextColumn Header="Mobile" Binding="{Binding MobileNumber}" Width="100"/>
-                        <DataGridTextColumn Header="Address" Binding="{Binding CurrentAddress}" Width="150"/>
+                        <DataGridTextColumn Header="Acc No" Binding="{Binding AccountNumber}" Width="*"/>
+                        <DataGridTextColumn Header="Account Type" Binding="{Binding AccountType}" Width="*"/>
+                        <DataGridTextColumn Header="Name" Width="*" SortMemberPath="FirstName">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                    <Binding Path="FirstName" />
+                                    <Binding Path="MiddleName" />
+                                    <Binding Path="LastName" />
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="*"/>
+                        <DataGridTextColumn Header="DOB" Binding="{Binding DateOfBirth}" Width="*"/>
+                        <DataGridTextColumn Header="PAN" Binding="{Binding PanNumber}" Width="*"/>
+                        <DataGridTextColumn Header="Adhar" Binding="{Binding AdharNo}" Width="*"/>
+                        <DataGridTextColumn Header="Mobile" Binding="{Binding MobileNumber}" Width="*"/>
+                        <DataGridTextColumn Header="Address" Binding="{Binding CurrentAddress}" Width="*"/>
+
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

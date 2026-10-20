@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankAssignment.Migrations
 {
     [DbContext(typeof(BankDbContext))]
-    [Migration("20260106180950_FinalDatabaseFix")]
-    partial class FinalDatabaseFix
+    [Migration("20260201191407_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,10 @@ namespace BankAssignment.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountNumber"), 1000L);
 
                     b.Property<string>("AccountType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdharNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

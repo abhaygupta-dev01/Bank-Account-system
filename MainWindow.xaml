@@ -4,6 +4,6 @@
         xmlns:views="clr-namespace:BankAssignment.Views"
         Title="Bank Management System" Height="650" Width="850">
     <Grid>
-        <views:LoginView />
+        <views:LoginView Margin="-10,-10,10,10" />
     </Grid>
 </Window>

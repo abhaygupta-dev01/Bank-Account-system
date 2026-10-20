@@ -10,13 +10,11 @@ namespace BankAssignment.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Use SQL Server LocalDB
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BankAssignmentDB;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Starts account numbers at 1000 as required
             modelBuilder.Entity<Account>()
                 .Property(a => a.AccountNumber)
                 .UseIdentityColumn(1000, 1);

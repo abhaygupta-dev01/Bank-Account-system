@@ -11,6 +11,7 @@ namespace BankAssignment.Views
     public partial class AccountManagementView : UserControl
     {
         private Account? _selectedAccount = null;
+     
 
         public AccountManagementView() { InitializeComponent(); }
 
@@ -38,6 +39,10 @@ namespace BankAssignment.Views
             {
                 MessageBox.Show("Enter valid mobile no ( e.g. 9876543210)"); return;
             }
+            if (!Regex.IsMatch(txtAdhar.Text, @"^[2-9]\d{11}$"))
+            {
+                MessageBox.Show("Enter valid adhar no ( e.g. 487658052410)"); return;
+            }
             if (dtpDOB.SelectedDate == null) return;
             int age = DateTime.Today.Year - dtpDOB.SelectedDate.Value.Year;
             if (age < 5 || age > 80) { MessageBox.Show("Age must be between 5 and 80."); return; }
@@ -57,7 +62,8 @@ namespace BankAssignment.Views
                         PanNumber = txtPan.Text.ToUpper(),
                         CurrentAddress = txtCurrAddr.Text.ToUpper(),
                         PermanentAddress = txtPermAddr.Text.ToUpper(),
-                        MobileNumber = txtMobile.Text
+                        MobileNumber = txtMobile.Text,
+                        AdharNo = txtAdhar.Text
                     };
                     db.Accounts.Add(acc);
                 }
@@ -73,7 +79,8 @@ namespace BankAssignment.Views
                         acc.CurrentAddress = txtCurrAddr.Text.ToUpper();
                         acc.PermanentAddress = txtPermAddr.Text.ToUpper();
                         acc.MobileNumber = txtMobile.Text;
-                        
+                        acc.AdharNo = txtAdhar.Text;
+
                     }
                 }
                 db.SaveChanges();
@@ -100,7 +107,9 @@ namespace BankAssignment.Views
             txtCurrAddr.Text = _selectedAccount.CurrentAddress;
             txtPermAddr.Text = _selectedAccount.PermanentAddress;
             txtMobile.Text = _selectedAccount.MobileNumber;
+            txtAdhar.Text = _selectedAccount.AdharNo;
             dtpDOB.SelectedDate = _selectedAccount.DateOfBirth;
+           
         }
 
         private void RefreshGrid() { using (var db = new BankDbContext()) dgAccounts.ItemsSource = db.Accounts.ToList(); }
@@ -108,8 +117,13 @@ namespace BankAssignment.Views
         private void ClearForm()
         {
             txtFirst.Text = txtMiddle.Text = txtLast.Text = txtPan.Text = "";
-            txtCurrAddr.Text = txtPermAddr.Text = txtMobile.Text = "";
+            txtCurrAddr.Text = txtPermAddr.Text = txtAdhar.Text = txtMobile.Text = ""; 
             dtpDOB.SelectedDate = null;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

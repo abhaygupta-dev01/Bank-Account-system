@@ -7,15 +7,20 @@ namespace BankAssignment.Models
     {
         [Key]
         public int AccountNumber { get; set; }
+
         public string AccountType { get; set; } = "";
+
+        [Required]
         public string FirstName { get; set; } = "";
         public string? MiddleName { get; set; }
         public string LastName { get; set; } = "";
+        [Required]
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; } = "";
         public string PanNumber { get; set; } = "";
         public string CurrentAddress { get; set; } = "";
         public string PermanentAddress { get; set; } = "";
         public string MobileNumber { get; set; } = "";
+        public string AdharNo { get; set; } = "";
     }
 }

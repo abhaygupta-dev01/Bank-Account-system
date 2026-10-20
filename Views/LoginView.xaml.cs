@@ -22,7 +22,6 @@ namespace BankAssignment.Views
             using (var db = new BankDbContext())
             {
                 var user = db.Users.FirstOrDefault(u => u.UserID == _viewModel.InputUserID && u.Password == _viewModel.InputPassword);
-             // var user1 = db.Users.FirstOrDefault(u => u.UserID == _viewModel.InputUserID && u.Password == _viewModel.InputPassword);
 
                 if (user != null)
                 {

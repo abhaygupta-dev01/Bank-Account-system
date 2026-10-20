@@ -34,6 +34,10 @@ namespace BankAssignment.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AdharNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CurrentAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

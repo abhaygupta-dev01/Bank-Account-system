@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace BankAssignment
 {
-    public partial class App : Application
+    public partial class App : Application  
     {
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -17,8 +17,6 @@ namespace BankAssignment
                 if (!db.Users.Any())
                 {
                     db.Users.Add(new User { UserID = "admin", Password = "123" });
-                   // db.Users.Add(new User1 { UserID = "abhay", Password = "123" });
-                   // db.Users.Add(new User2 { UserID = "panacea", Password = "123" });
                     db.SaveChanges();
                 }
             }
